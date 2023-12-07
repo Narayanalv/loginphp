@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        *{font-size: 20px;}
+        .login{width: 40%;height: 100%;display: block;border-radius: 20px;border: 5px black;position: relative;background-color: yellow;margin-top: 10%;box-shadow: 2px 2px 5px;}
+        #show{font-size: 15px;}
+        #pass,#email{width: 60%;}
+        @media screen and (max-width:1200px) {
+            *{font-size: clamp(0.5rem,5vm,5rem);}
+            input{width: 60%;height: auto;height: 2%;}
+            #blogin{width: 20%;height: auto;font-size: auto;height: 2%;}
+            #reg{width: 20%;font-size: .5rem,2vm,2rem;height: 2%;}
+            #check{width: auto;}
+        }
+    </style>
+    <script src="jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    <center>
+        <div class="login">
+            Login <br><br><br>
+            <input type="email" name="email" id="email" placeholder="Enter Your email"><br><br>
+            <input type="password" name="password" id="pass" placeholder="Enter Your password"><br>
+            <input type="checkbox" name="" id="check" title="Show Password"><span id="show">Show Password</span>
+            <br><br>
+            <input type="submit" value="Login" id="blogin"><input type="button" value="Register" id="reg">
+            <br><br><p></p>
+        </div>
+    </center>
+<script>
+    const blogin=document.getElementById('blogin');
+    const reg=document.getElementById('reg');
+    reg.addEventListener('click',()=>{
+        window.location.href="register.php"
+    })
+    blogin.addEventListener('click',()=>{
+        let email=document.getElementById('email').value;
+        let pass=document.getElementById('pass').value;
+        $.ajax({
+            type: "POST",
+            url: "login.php",
+            data: {
+                email:email,
+                pass:pass
+            },
+            success: function (response) {
+                alert(response);
+            }
+        });
+    })
+</script>
+</body>
+</html>
